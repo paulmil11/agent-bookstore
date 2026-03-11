@@ -1,5 +1,7 @@
 # Agent Bookstore
 
+[![Pathless Bookstore — Live Example](screenshot.png)](https://agent.pathlesspublishing.com)
+
 An open-source, agent-first bookstore template for indie authors. Sell books directly to AI agents via API, MCP server, and web storefront. Each copy is watermarked, citable, and delivered in machine-readable formats.
 
 **See it live:** [agent.pathlesspublishing.com](https://agent.pathlesspublishing.com) — Paul Millerd's deployment of this template.
