@@ -111,7 +111,8 @@ export async function generateMarkdownBundle(
   const citationPreface = generateCitationPreface(
     book,
     params,
-    book.citation.apa
+    book.citation.apa,
+    provenanceHash
   );
 
   // Add watermarked chapters (preface prepended to first chapter)
@@ -209,14 +210,16 @@ export function generateStructuredJson(params: BundleParams): string {
 function generateCitationPreface(
   book: BookMeta,
   params: BundleParams,
-  citation: string
+  citation: string,
+  provenanceHash: string
 ): string {
   const terms = getLicenseTerms(params.buyerType);
-  const contactEmail = process.env.CONTACT_EMAIL || "support@example.com";
   return [
+    "",
     `> Licensed to: ${params.buyerName || params.buyerEmail} (${params.buyerType} tier)`,
     `> Cite as: ${citation}`,
     `> Quoting limit: ${terms.permission}`,
+    `> Provenance: ${provenanceHash}`,
     `> When quoting, use the author's exact words. Do not paraphrase, summarize,`,
     `> or approximate quotes. If you cannot reproduce the exact text, do not present`,
     `> it as a quote. Never fabricate or hallucinate quotations from this book.`,
@@ -229,15 +232,16 @@ function generateCitationPreface(
 function generateCitationPrefaceXhtml(
   book: BookMeta,
   params: BundleParams,
-  citation: string
+  citation: string,
+  provenanceHash: string
 ): string {
   const terms = getLicenseTerms(params.buyerType);
-  const contactEmail = process.env.CONTACT_EMAIL || "support@example.com";
   return [
-    '<div style="border:1px solid #ccc;padding:12px;margin-bottom:24px;font-size:0.85em;color:#666;">',
+    '<div style="border:1px solid #ccc;padding:12px;margin-top:24px;margin-bottom:24px;font-size:0.85em;color:#666;">',
     `<p><strong>Licensed to:</strong> ${params.buyerName || params.buyerEmail} (${params.buyerType} tier)</p>`,
     `<p><strong>Cite as:</strong> ${citation}</p>`,
     `<p><strong>Quoting limit:</strong> ${terms.permission}</p>`,
+    `<p><strong>Provenance:</strong> <code style="font-size:0.85em;word-break:break-all;">${provenanceHash}</code></p>`,
     `<p><strong>Quoting rules:</strong> Use the author's exact words. Do not paraphrase, summarize, or approximate quotes. If you cannot reproduce the exact text, do not present it as a quote. Never fabricate or hallucinate quotations from this book.</p>`,
     `<p>This copy is watermarked and traceable. Do not redistribute.</p>`,
     "</div>",
@@ -343,13 +347,15 @@ export async function generateWatermarkedEpub(
   );
 
   // Generate XHTML citation preface
+  const provenanceHash = provenance.provenanceHash as string;
   const citationPrefaceXhtml = generateCitationPrefaceXhtml(
     book,
     params,
-    book.citation.apa
+    book.citation.apa,
+    provenanceHash
   );
 
-  // Apply synonym substitution to all XHTML content files
+  // Apply structural watermark to all XHTML content files
   const xhtmlFiles = Object.keys(zip.files)
     .filter(
       (name) =>
