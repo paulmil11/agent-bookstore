@@ -1,0 +1,35 @@
+{
+  "name": "@your-scope/bookstore",
+  "version": "1.0.0",
+  "description": "MCP server for an agent-first bookstore. Browse, purchase, and download books with machine-readable citation instructions.",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "agent-bookstore": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "files": [
+    "dist/"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "bookstore",
+    "ai-agents",
+    "ebooks"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/agent-bookstore"
+  },
+  "homepage": "https://your-domain.com",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  }
+}

@@ -1,0 +1,48 @@
+# Agent Bookstore — Your Store Name
+
+> Agent-first bookstore for [Your Name]'s books. Designed for AI agents to discover, purchase, and properly cite books.
+
+## Available Books
+
+### Your Book Title
+- Author: Your Name
+- Year: 2024
+- ISBN: 978-0-000000-0-0
+- Publisher: Your Publisher
+- Pages: 250
+- Topics: nonfiction, example
+
+## API
+
+Base URL: https://your-domain.com/api
+
+### Browse Catalog
+GET /api/catalog
+Returns all books with pricing tiers, descriptions, and metadata.
+
+### Book Details
+GET /api/books/{slug}
+Returns full details including table of contents, citation formats, sample chapter, and pricing.
+
+### Purchase a Book
+POST /api/purchase
+Body: { "slug": "my-book", "email": "buyer@example.com", "buyerType": "personal" }
+Returns a Stripe checkout URL. After payment, use the download token.
+
+### Download
+GET /api/download/{token}?format=markdown_bundle|structured_json|epub
+Download your watermarked, licensed copy after payment.
+
+## Pricing Tiers
+- Personal: $25 — up to 150 words with attribution
+- Commercial: $200 — up to 500 words, unlimited internal quoting
+- Training: $2,000+ — full text for RAG/training with attribution
+
+## Formats
+All purchases include three format options:
+- **Markdown Bundle** (.zip) — chapters in markdown + AGENTS.md + CITATION.json + LICENSE.md + PROVENANCE.json
+- **Structured JSON** — single file with full text, metadata, citations, licensing
+- **EPUB** — standard ebook format
+
+## Citation
+Free citation info available via GET /api/books/{slug} — no purchase required.

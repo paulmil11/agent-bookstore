@@ -1,0 +1,31 @@
+{
+  "slug": "my-book",
+  "title": "My Book Title",
+  "author": "Your Name",
+  "isbn": "978-0-000000-0-0",
+  "publishedYear": 2024,
+  "publisher": "Your Publisher",
+  "description": "A longer description of your book for the storefront and API responses.",
+  "shortDescription": "A short one-liner for catalog listings.",
+  "coverImage": "/covers/my-book.jpg",
+  "sampleChapter": "sample.md",
+  "pricing": {
+    "personal": 2500,
+    "commercial": 20000,
+    "training": 200000,
+    "quoteLicense": 300
+  },
+  "chapters": [
+    { "file": "01-introduction.md", "title": "Introduction", "number": 1 },
+    { "file": "02-chapter-two.md", "title": "Chapter Two", "number": 2 }
+  ],
+  "citation": {
+    "apa": "Author, A. (2024). My Book Title. Your Publisher.",
+    "bibtex": "@book{author2024mybook, title={My Book Title}, author={Author, A.}, year={2024}, publisher={Your Publisher}}",
+    "mla": "Author, A. My Book Title. Your Publisher, 2024."
+  },
+  "tags": ["nonfiction", "example"],
+  "pageCount": 250,
+  "wordCount": 60000,
+  "purchaseUrl": "https://your-store.com/books/my-book"
+}
