@@ -19,7 +19,7 @@ This template gives you a complete bookstore that works for both AI agents and h
 - **Web storefront** — dark, minimal UI for human buyers
 - **Three delivery formats** — Markdown bundle, structured JSON, and EPUB
 - **AGENTS.md per book** — machine-readable citation formats, quoting limits, and license terms
-- **Steganographic watermarking** — each copy is uniquely fingerprinted via synonym substitution and structural formatting
+- **Steganographic watermarking** — each copy is uniquely fingerprinted via structural formatting and provenance metadata
 - **Tiered pricing** — Personal / Commercial / Training tiers with different quoting allowances
 
 ## How It Works
@@ -126,7 +126,7 @@ src/
 │       ├── download/[token]/route.ts  # GET — download watermarked copy
 │       └── webhooks/stripe/route.ts   # Stripe payment webhook
 ├── lib/
-│   ├── watermark.ts                # Synonym substitution + structural fingerprinting
+│   ├── watermark.ts                # Structural fingerprinting + provenance metadata
 │   ├── formats.ts                  # Markdown bundle, JSON, EPUB generation
 │   ├── catalog.ts                  # Book catalog from content/ directory
 │   ├── citations.ts                # Citation format generators
@@ -161,15 +161,11 @@ public/
 
 ## Watermarking
 
-Each copy is fingerprinted with three layers:
+Each copy is fingerprinted with two layers. Neither alters the author's words.
 
-1. **Synonym substitution** — at predetermined positions, semantically equivalent words are swapped based on the buyer's ID hash. "began" vs "started", "however" vs "nevertheless". Impossible to detect without the substitution map.
+1. **Structural fingerprinting** — paragraph spacing patterns encode buyer data in the whitespace between paragraphs. Survives copy-paste, reformatting, and AI pipelines.
 
-2. **Structural fingerprinting** — paragraph spacing patterns encode buyer data in the whitespace between paragraphs.
-
-3. **Metadata watermark** — `PROVENANCE.json` with buyer hash, purchase timestamp, and license scope. Easy to strip but provides an honest-user verification path.
-
-Layers 1 and 2 survive copy-paste, reformatting, and AI pipelines.
+2. **Metadata watermark** — `PROVENANCE.json` with buyer hash, purchase timestamp, and license scope. Provides an honest-user verification path.
 
 ## API Reference
 
@@ -206,7 +202,7 @@ The storefront (`src/app/page.tsx`) uses inline styles with a dark theme. To cus
 - **Colors/branding**: Edit the style objects in `page.tsx` and `books/[slug]/page.tsx`
 - **Pricing tiers**: Edit `book.json` for each book (prices in cents)
 - **Quoting limits**: Edit `getLicenseTerms()` in `src/lib/formats.ts`
-- **Watermark pairs**: Edit `SYNONYM_PAIRS` in `src/lib/watermark.ts`
+- **Watermarking**: See `src/lib/watermark.ts` for structural fingerprinting logic
 - **llms.txt**: Edit `public/llms.txt` for agent discovery
 
 ## License

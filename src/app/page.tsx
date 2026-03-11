@@ -153,7 +153,7 @@ export default function Home() {
                 },
                 {
                   title: "Watermarked",
-                  desc: "Invisible synonym substitution and structural fingerprinting. Each copy is traceable, even after reformatting or extraction.",
+                  desc: "Structural fingerprinting and provenance metadata. Each copy is traceable without changing the author's words.",
                 },
                 {
                   title: "AGENTS.md Included",
@@ -322,10 +322,10 @@ export default function Home() {
                 margin: "0 0 32px 0",
               }}
             >
-              Three layers of identification per copy: a visible license page,
-              invisible synonym substitution at predetermined positions, and
-              structural formatting fingerprints. If a copy leaks, the buyer is
-              identifiable.
+              Two layers of identification per copy: a visible license page
+              with PROVENANCE.json, and structural formatting fingerprints
+              encoded in the whitespace. Your words are never changed. If a
+              copy leaks, the buyer is identifiable.
             </p>
           </FadeIn>
 
@@ -404,9 +404,9 @@ export default function Home() {
                     margin: 0,
                   }}
                 >
-                  Synonym substitution at 30 predetermined positions + structural
-                  formatting patterns. Survives copy-paste, reformatting, and
-                  AI pipelines.
+                  Structural formatting patterns encoded in paragraph spacing.
+                  No words are changed. Survives copy-paste, reformatting,
+                  and AI pipelines.
                 </p>
               </div>
             </div>
